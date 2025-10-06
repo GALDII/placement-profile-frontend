@@ -3,17 +3,13 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import '../App.css';
 
 const StudentProfiles = () => {
-    // State to hold profiles fetched from the API
     const [profiles, setProfiles] = useState([]);
-    // State for the search query
     const [searchQuery, setSearchQuery] = useState('');
-    // State to handle loading status
     const [isLoading, setIsLoading] = useState(true);
 
-    // Your backend API URL - UPDATED to the new public endpoint
-    const API_URL = 'http://localhost:5000/api/public/profiles';
+    // Use the environment variable for the API URL, with localhost as a fallback for development
+    const API_URL = `${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/api/public/profiles`;
 
-    // Function to fetch profiles from the server
     useEffect(() => {
         const fetchProfiles = async () => {
             try {
@@ -26,19 +22,17 @@ const StudentProfiles = () => {
                 setProfiles(data);
             } catch (error) {
                 console.error("Failed to fetch profiles:", error);
-                setProfiles([]); // Set to empty array on error
+                setProfiles([]);
             } finally {
                 setIsLoading(false);
             }
         };
 
         fetchProfiles();
-    }, []); // The empty array [] means this effect runs once when the component mounts
+    }, [API_URL]); // Depend on API_URL
 
-    // Filter profiles based on the search query
     const filteredProfiles = profiles.filter(profile => {
         const query = searchQuery.toLowerCase();
-        // Ensure all fields are strings before calling toLowerCase
         const name = profile.name || '';
         const specialization = profile.specialization || '';
         const skills = profile.skills || '';
@@ -50,44 +44,37 @@ const StudentProfiles = () => {
         );
     });
 
-    // Handle search input changes
     const handleSearchChange = (e) => {
         setSearchQuery(e.target.value);
     };
 
     return (
-        <div id="student-profiles">
-            <h1>Student Profiles</h1>
-            <div className="search-container">
+        <div id="student-profiles" className="p-4 sm:p-6 md:p-8">
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-center text-gray-800 mb-4">Student Profiles</h1>
+            <div className="max-w-md mx-auto mb-10">
                 <input
                     type="text"
-                    id="search-bar"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                     placeholder="Search by name, specialization, skills..."
                     value={searchQuery}
                     onChange={handleSearchChange}
                 />
-                <button id="search-button"><i className="fas fa-search"></i></button>
             </div>
             
-            {isLoading ? <p className="loading-text">Loading profiles...</p> : (
-                <div id="profiles-container" className="profiles-container">
+            {isLoading ? <p className="text-center text-xl p-16 text-gray-500">Loading profiles...</p> : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
                     {filteredProfiles.map((profile) => (
-                        <div className="profile-card" key={profile.id}>
-                            <div className="profile-image-container">
-                                {/* Use the photo_url from the database */}
-                                <img src={profile.photo_url} alt={profile.name} className="profile-image" />
+                        <div key={profile.id} className="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+                             <div className="h-56">
+                                <img src={profile.photo_url} alt={profile.name} className="w-full h-full object-cover" />
                             </div>
-                            <div className="profile-content">
-                                <h3 className="profile-name">{profile.name}</h3>
-                                <p className="profile-specialization">{profile.specialization}</p>
-                                <p className="profile-skills"><strong>Skills:</strong> {profile.skills}</p>
-                            </div>
-                            <div className="social-media">
-                                <a href={profile.github} target="_blank" rel="noreferrer"><i className="fab fa-github"></i></a>
-                                <a href={profile.linkedin} target="_blank" rel="noreferrer"><i className="fab fa-linkedin"></i></a>
-                                {profile.portfolio && (
-                                    <a href={profile.portfolio} target="_blank" rel="noreferrer"><i className="fas fa-user"></i></a>
-                                )}
+                            <div className="p-5 text-center">
+                                <h3 className="text-lg font-bold text-gray-900 truncate">{profile.name}</h3>
+                                <p className="text-sm text-gray-600 capitalize h-10">{profile.specialization}</p>
+                                <div className="mt-4 flex justify-center gap-4">
+                                    <a href={profile.github} target="_blank" rel="noreferrer" className="text-xl text-gray-400 hover:text-gray-800"><i className="fab fa-github"></i></a>
+                                    <a href={profile.linkedin} target="_blank" rel="noreferrer" className="text-xl text-gray-400 hover:text-blue-600"><i className="fab fa-linkedin"></i></a>
+                                </div>
                             </div>
                         </div>
                     ))}
@@ -98,3 +85,4 @@ const StudentProfiles = () => {
 };
 
 export default StudentProfiles;
+
