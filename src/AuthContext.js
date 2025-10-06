@@ -3,67 +3,63 @@ import { jwtDecode } from 'jwt-decode';
 
 const AuthContext = createContext(null);
 
+// This is the base URL for your backend. It uses the environment variable for production
+// and falls back to localhost for local development.
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
 export const AuthProvider = ({ children }) => {
-    // Manages the raw JWT token string
     const [userToken, setUserToken] = useState(localStorage.getItem('userToken'));
-    // Manages the full user object, including their role from your database
     const [user, setUser] = useState(null);
 
-    // Helper function to create the authorization header for API calls
     const getAuthHeader = () => {
         const token = localStorage.getItem('userToken');
         return token ? { 'Authorization': `Bearer ${token}` } : {};
     };
 
-    // This effect runs whenever the app loads or the user logs in/out (token changes)
     useEffect(() => {
         const fetchUser = async () => {
             const token = localStorage.getItem('userToken');
             if (token) {
                 try {
                     const decoded = jwtDecode(token);
-                    // Check if the token is expired
                     if (decoded.exp * 1000 > Date.now()) {
-                        // Token is valid, now fetch the full user profile with their role from your backend
-                        const response = await fetch('http://localhost:5000/api/profiles/me', {
+                        // Token is valid, now fetch the full user profile with role from the backend
+                        const response = await fetch(`${API_BASE_URL}/api/profiles/me`, {
                             headers: getAuthHeader()
                         });
-                        
                         if (response.ok) {
                             const profileData = await response.json();
-                            setUser(profileData); // User has a profile, store it
+                            setUser(profileData);
                         } else if (response.status === 404) {
-                            // User is authenticated but has no profile yet in the database.
-                            // We create a temporary user object with the role 'student'.
-                            setUser({ name: decoded.name, email: decoded.email, role: 'student' });
+                            // User is authenticated but has no profile yet in the database
+                            setUser({ name: decoded.name, email: decoded.email, role: 'student', picture: decoded.picture });
+                        } else {
+                            // Another error occurred, log the user out
+                            logout();
                         }
                     } else {
-                        // Token is expired, log them out
-                        logout();
+                        logout(); // Token is expired
                     }
                 } catch (error) {
-                    console.error("Authentication initialization failed:", error);
-                    logout(); // Log out on any error
+                    console.error("Auth initialization failed:", error);
+                    logout();
                 }
             }
         };
         fetchUser();
-    }, [userToken]); // Re-run this effect when the token changes
+    }, [userToken]); // This effect now only depends on userToken
 
-    // Function to call when a user successfully logs in
     const login = (token) => {
         localStorage.setItem('userToken', token);
-        setUserToken(token); // This will trigger the useEffect above to fetch the user's details
+        setUserToken(token); // This will trigger the useEffect to fetch the user's data
     };
 
-    // Function to log the user out
     const logout = () => {
         localStorage.removeItem('userToken');
         setUserToken(null);
         setUser(null);
     };
 
-    // Provide the user object, token, and functions to the rest of the app
     return (
         <AuthContext.Provider value={{ user, userToken, login, logout, getAuthHeader }}>
             {children}
@@ -71,6 +67,5 @@ export const AuthProvider = ({ children }) => {
     );
 };
 
-// Custom hook to easily access the auth context in any component
 export const useAuth = () => useContext(AuthContext);
 
