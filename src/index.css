@@ -130,69 +130,6 @@ input[type="checkbox"]:checked ~ .actions {
   }
 }
 
-/* General styles */
-
-/* 
-nav {
-  background-color: #333333;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  position: sticky;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
-  box-sizing: border-box;
-}
-
-nav .logo img {
-  max-height: 50px;
-  max-width: 100%;
-}
-
-nav ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-}
-
-nav ul li {
-  margin: 0 10px;
-}
-
-nav ul li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 20px;
-  text-decoration: none;
-}
-
-nav ul li a:hover {
-  background-color: #111;
-}
-
-.actions {
-  display: flex;
-  align-items: center;
-  margin-right: 20px;
-}
-
-.actions button {
-  background-color: #555;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  margin-left: 10px;
-  cursor: pointer;
-}
-
-.actions button:hover {
-  background-color: #444;
-}  */
-
 /* Section Styles */
 section {
   padding: 40px 20px;
@@ -282,69 +219,6 @@ section {
   max-width: 80%;
   width: auto;
 }
-/* 
-General Section Styling
-#about {
-  padding: 40px 20px;
-  background-color: #f9f9f9; 
-}
-
-.highlights-container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 20px;
-  padding: 20px;
-}
-
-
-.highlight-box {
-  padding: 30px 20px;
-  border: 1px solid #ddd;
-  background-color: #fff;
-  text-align: center;
-  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-  opacity: 0;
-  transform: translateY(20px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  border-radius: 10px;
-  position: relative;
-  overflow: hidden;
-}
-
-.highlight-box i {
-  font-size: 40px;
-  color: #4a90e2; 
-  margin-bottom: 20px;
-}
-
-.highlight-box h3 {
-  font-size: 1.5em;
-  margin-bottom: 15px;
-}
-
-.highlight-box p {
-  font-size: 1em;
-  color: #666;
-}
-
-.highlight-box.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.highlight-box:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-@media (max-width: 768px) {
-  .highlights-container {
-      grid-template-columns: 1fr;
-  }
-}
-*/
 /* About Section Styles */
 #about {
   background-color: #f9f9f9;
