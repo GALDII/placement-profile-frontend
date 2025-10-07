@@ -240,7 +240,7 @@ const UserDashboard = () => {
     const [isEditing, setIsEditing] = useState(false);
     const { getAuthHeader, user } = useAuth();
 
-    const API_URL = 'http://localhost:5000/api/profiles/me';
+    const API_URL = process.env.REACT_APP_API_URL ? `${process.env.REACT_APP_API_URL}/api/profiles/me`: 'http://localhost:5000/api/profiles/me';
 
     const fetchMyProfile = useCallback(async () => {
         if (!user) return;
