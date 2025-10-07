@@ -44,7 +44,9 @@ const Navbar = () => {
                 <li><NavLink to="/" onClick={handleLinkClick}>Home</NavLink></li>
                 <li><a href="/#about" onClick={handleLinkClick}>About</a></li>
                 <li><a href="/#student-profiles" onClick={handleLinkClick}>Profiles</a></li>
-
+                <li><a href="/#recruiters" onClick={handleLinkClick}>Recruiters</a></li>
+                <li><a href="/#contact" onClick={handleLinkClick}>Contact</a></li>
+                
                 {/* Conditionally rendered links for logged-in users */}
                 {user && <li><NavLink to="/dashboard" onClick={handleLinkClick}>My Dashboard</NavLink></li>}
                 
@@ -72,4 +74,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-

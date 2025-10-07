@@ -10,6 +10,8 @@ import UserDashboard from './components/UserDashboard';
 import LoginPage from './components/LoginPage';
 import AboutSection from './components/AboutSection';
 import Slider from './components/Slider';
+import RecruitersSection from './components/RecruitersSection';
+import ContactFooter from './components/ContactFooter';
 import './App.css';
 
 // This is a special component to protect routes that require a user to be logged in.
@@ -25,6 +27,8 @@ const HomePage = () => (
         <Slider />
         <AboutSection />
         <StudentProfiles />
+        <RecruitersSection />
+        <ContactFooter />
     </>
 );
 
@@ -72,4 +76,3 @@ function App() {
 }
 
 export default App;
-

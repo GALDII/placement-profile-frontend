@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { 
-    GraduationCap, School, LaptopCode, Briefcase, 
+    GraduationCap, School, Laptop, Briefcase, 
     ChevronLeft, ChevronRight, Heart, Target, Award 
 } from 'lucide-react';
 import '../App.css';
@@ -130,7 +130,7 @@ const AboutSection = () => {
                             className="inline-flex items-center justify-center w-14 h-14 rounded-xl mb-4"
                             style={{ backgroundColor: '#4a90e2' }}
                         >
-                            <LaptopCode className="w-7 h-7 text-white" />
+                            <Laptop className="w-7 h-7 text-white" />
                         </div>
                         <h2 className="text-2xl font-bold mb-4" style={{ color: '#4a90e2' }}>
                             About MSc Data Science Programme of 2024-26
