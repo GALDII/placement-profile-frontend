@@ -74,6 +74,7 @@ const StudentProfiles = () => {
                                 <div className="mt-4 flex justify-center gap-4">
                                     <a href={profile.github} target="_blank" rel="noreferrer" className="text-xl text-gray-400 hover:text-gray-800"><i className="fab fa-github"></i></a>
                                     <a href={profile.linkedin} target="_blank" rel="noreferrer" className="text-xl text-gray-400 hover:text-blue-600"><i className="fab fa-linkedin"></i></a>
+                                    <a href={profile.portfolio} target="_blank" rel="noreferrer" className="text-xl text-gray-400 hover:text-blue-600"><i className="fab fa-linkedin"></i></a>
                                 </div>
                             </div>
                         </div>
