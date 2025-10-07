@@ -11,8 +11,8 @@ const AboutSection = () => {
     const slides = [
         {
             src: process.env.PUBLIC_URL + '/assets/IEE_grp_pht.jpeg',
-            alt: 'IEE Conference',
-            title: 'IEE CONFERENCE',
+            alt: 'IEEE Conference',
+            title: 'IEEE CONFERENCE',
             text: 'Volunteers of the conference',
         },
         {
