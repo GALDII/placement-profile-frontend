@@ -289,7 +289,7 @@ const AdminDashboard = () => {
     const { user, getAuthHeader } = useAuth();
 
     const isAdminUser = user && user.role === 'admin';
-    const API_URL = process.env.REACT_APP_API_URL ? `${process.env.REACT_APP_API_URL}/api/profiles `: 'http://localhost:5000/api/profiles';
+    const API_URL = process.env.REACT_APP_API_URL ? `${process.env.REACT_APP_API_URL}/api/profiles`: 'http://localhost:5000/api/profiles';
 
 
     const showToast = (message, type = 'success') => setToast({ message, type });
