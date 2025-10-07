@@ -19,7 +19,15 @@ const StudentProfiles = () => {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 const data = await response.json();
-                setProfiles(data);
+                
+                // Sort profiles by name in ascending order
+                const sortedData = data.sort((a, b) => {
+                    const nameA = (a.name || '').toLowerCase();
+                    const nameB = (b.name || '').toLowerCase();
+                    return nameA.localeCompare(nameB);
+                });
+                
+                setProfiles(sortedData);
             } catch (error) {
                 console.error("Failed to fetch profiles:", error);
                 setProfiles([]);
