@@ -14,9 +14,14 @@
                 email: 'gobinath.r@christuniversity.in'
             },
             {
-                name: 'Dr. Balakrishnan C',
-                phone: '+91 98657 82529',
-                email: 'balakrishnan.c@christuniversity.in'
+                name: 'Dr. Hemanth. K. S',
+                phone: '+91 99862 57582',
+                email: 'hemanth.ks@christuniversity.in'
+            },
+            {
+                name: 'Renish Nilofer',
+                phone: '+91 95911 71755',
+                email: 'renish.nilofer@christuniversity.in'
             }
         ];
 
