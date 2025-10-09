@@ -64,7 +64,7 @@
                                 </h3>
                                 <div className="space-y-1 text-sm">
                                     <a
-                                        href="#"
+                                        href="https://docs.google.com/forms/u/1/d/e/1FAIpQLSc9VL_2JkVTPG7hlCYIKI_etc_dS-qGmQTdQPOE0yuoH6dxSA/viewform?usp=header"
                                         className="flex items-center gap-1 transition-colors duration-300"
                                         style={{ color: '#0000EE' }}
                                         onMouseEnter={(e) => e.currentTarget.style.textDecoration = 'underline'}

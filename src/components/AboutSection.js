@@ -1,227 +1,281 @@
-import React, { useState } from 'react';
-import { 
-    GraduationCap, School, Laptop, Briefcase, 
-    ChevronLeft, ChevronRight, Heart, Target, Award 
-} from 'lucide-react';
-import '../App.css';
+import React, { useState, useEffect } from 'react';
+import { GraduationCap, School, Trophy, Calendar, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const AboutSection = () => {
-    const [currentSlide, setCurrentSlide] = useState(0);
+    const [achievementSlide, setAchievementSlide] = useState(0);
+    const [eventSlide, setEventSlide] = useState(0);
 
-    const slides = [
+    const achievements = [
+        {
+            src: process.env.PUBLIC_URL + '/assets/kiran.jpg',
+            alt: 'Hackathon',
+            title: 'Hackathon 2024',
+            text: 'Winners of Inter-University Hackathon'
+        },
+        {
+            src: process.env.PUBLIC_URL + '/assets/award.jpg',
+            alt: 'Award',
+            title: 'Excellence Award',
+            text: 'Best Project Award in Data Science'
+        },
+        {
+            src: process.env.PUBLIC_URL + '/assets/chethan.jpeg',
+            alt: 'Competition',
+            title: 'Coding Competition',
+            text: 'Top performers in coding challenge'
+        },
+        ,
+        {
+            src: process.env.PUBLIC_URL + '/assets/Neostat hackathon.jpeg',
+            alt: 'Competition',
+            title: 'Coding Competition',
+            text: 'Top performers in coding challenge'
+        },
+    ];
+
+    const events = [
         {
             src: process.env.PUBLIC_URL + '/assets/IEE_grp_pht.jpeg',
             alt: 'IEEE Conference',
             title: 'IEEE CONFERENCE',
-            text: 'Volunteers of the conference',
+            text: 'Volunteers of the conference'
         },
         {
             src: process.env.PUBLIC_URL + '/assets/workshop2.jpeg',
-            alt: 'Net-set Exam Awareness',
-            title: 'Net-Set Exam',
-            text: 'Awareness of net and Set exam',
+            alt: 'Workshop',
+            title: 'Net-Set Exam Workshop',
+            text: 'Awareness of net and Set exam'
         },
         {
             src: process.env.PUBLIC_URL + '/assets/Workshop1.jpeg',
-            alt: 'Net-set Exam Awareness',
-            title: 'Net-Set Exam',
-            text: 'Awareness of net and Set exam',
+            alt: 'Workshop',
+            title: 'Training Session',
+            text: 'Skill development workshop'
+        },
+        {
+            src: process.env.PUBLIC_URL + '/assets/me_ciya.jpg',
+            alt: 'Workshop',
+            title: 'Training Session',
+            text: 'Skill development workshop'
         },
     ];
 
-    const changeSlide = (direction) => {
-        setCurrentSlide((prev) => (prev + direction + slides.length) % slides.length);
+    const changeSlide = (type, direction) => {
+        if (type === 'achievement') {
+            setAchievementSlide(prev => (prev + direction + achievements.length) % achievements.length);
+        } else {
+            setEventSlide(prev => (prev + direction + events.length) % events.length);
+        }
     };
 
-    const coreValues = [
-        { icon: Heart, text: 'Faith in God' },
-        { icon: Target, text: 'Moral Uprightness' },
-        { icon: Heart, text: 'Love of Fellow Beings' },
-        { icon: Award, text: 'Social Responsibility' },
-        { icon: Award, text: 'Pursuit of Excellence' },
-    ];
+    // Auto-slide
+    useEffect(() => {
+        const achievementInterval = setInterval(() => {
+            setAchievementSlide(prev => (prev + 1) % achievements.length);
+        }, 3000);
+        
+        const eventInterval = setInterval(() => {
+            setEventSlide(prev => (prev + 1) % events.length);
+        }, 3500);
+
+        return () => {
+            clearInterval(achievementInterval);
+            clearInterval(eventInterval);
+        };
+    }, []);
 
     return (
-        <section id="about" style={{ backgroundColor: '#f9f9f9', padding: '4rem 1rem' }}>
+        <section id="about" className="py-16 px-4 bg-gray-50">
             <div className="max-w-7xl mx-auto">
                 {/* Header */}
-                <div className="text-center mb-12 animate-fade-in">
-                    <h1 className="text-4xl sm:text-5xl font-extrabold mb-3" style={{ color: '#333' }}>
+                <div className="text-center mb-12">
+                    <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-3">
                         About the Program
                     </h1>
-                    <div className="w-24 h-1 mx-auto rounded-full" style={{ backgroundColor: '#4a90e2' }}></div>
+                    <div className="w-20 h-1 bg-blue-600 mx-auto rounded"></div>
                 </div>
 
-                {/* First Row */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-                    {/* CHRIST University */}
-                    <div 
-                        className="rounded-2xl shadow-lg p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
-                        style={{ backgroundColor: 'white', border: '1px solid #e0e0e0' }}
-                    >
-                        <div 
-                            className="inline-flex items-center justify-center w-14 h-14 rounded-xl mb-4"
-                            style={{ backgroundColor: '#4a90e2' }}
-                        >
-                            <GraduationCap className="w-7 h-7 text-white" />
+                {/* Grid Layout */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    
+                    {/* 1. CHRIST University */}
+                    <div className="bg-white rounded-xl shadow-md p-8 hover:shadow-lg transition-shadow">
+                        <div className="flex items-center gap-3 mb-6">
+                            <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
+                                <GraduationCap className="w-6 h-6 text-white" />
+                            </div>
+                            <h2 className="text-2xl font-bold text-gray-800">CHRIST University</h2>
                         </div>
-                        <h2 className="text-2xl font-bold mb-4" style={{ color: '#4a90e2' }}>
-                            About CHRIST University
-                        </h2>
                         
-                        <div className="space-y-3 mb-4">
-                            <div>
-                                <p className="font-semibold mb-1" style={{ color: '#333' }}>Vision:</p>
-                                <p style={{ color: '#666' }}>Excellence and Service</p>
+                        <div className="space-y-4 text-sm text-gray-600">
+                            <div className="border-l-4 border-blue-600 pl-4 py-2 bg-blue-50/50">
+                                <p className="font-bold text-gray-800 mb-1">Vision:</p>
+                                <p className="text-gray-700">Excellence and Service</p>
                             </div>
                             
-                            <div>
-                                <p className="font-semibold mb-1" style={{ color: '#333' }}>Mission:</p>
-                                <p style={{ color: '#666' }}>
-                                    CHRIST (Deemed to be University) is a nurturing ground for an individual's holistic development to make effective contribution to the society in a dynamic environment.
-                                </p>
+                            <div className="border-l-4 border-blue-500 pl-4 py-2 bg-blue-50/30">
+                                <p className="font-bold text-gray-800 mb-1">Mission:</p>
+                                <p className="text-gray-700 leading-relaxed">CHRIST (Deemed to be University) is a nurturing ground for an individual's holistic development to make effective contribution to the society in a dynamic environment.</p>
+                            </div>
+
+                            <div className="border-l-4 border-blue-400 pl-4 py-2 bg-blue-50/20">
+                                <p className="font-bold text-gray-800 mb-2">Core Values:</p>
+                                <ul className="space-y-1.5 text-gray-700">
+                                    <li className="flex items-start gap-2">
+                                        <span className="text-blue-600 mt-0.5">•</span>
+                                        <span>Faith in God</span>
+                                    </li>
+                                    <li className="flex items-start gap-2">
+                                        <span className="text-blue-600 mt-0.5">•</span>
+                                        <span>Moral Uprightness</span>
+                                    </li>
+                                    <li className="flex items-start gap-2">
+                                        <span className="text-blue-600 mt-0.5">•</span>
+                                        <span>Love of Fellow Beings</span>
+                                    </li>
+                                    <li className="flex items-start gap-2">
+                                        <span className="text-blue-600 mt-0.5">•</span>
+                                        <span>Social Responsibility</span>
+                                    </li>
+                                    <li className="flex items-start gap-2">
+                                        <span className="text-blue-600 mt-0.5">•</span>
+                                        <span>Pursuit of Excellence</span>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
+                    </div>
 
-                        <div>
-                            <p className="font-semibold mb-3" style={{ color: '#333' }}>Core Values:</p>
-                            <div className="space-y-2">
-                                {coreValues.map((value, index) => {
-                                    const Icon = value.icon;
-                                    return (
-                                        <div key={index} className="flex items-center gap-3">
-                                            <Icon className="w-4 h-4 flex-shrink-0" style={{ color: '#4a90e2' }} />
-                                            <span style={{ color: '#555' }}>{value.text}</span>
-                                        </div>
-                                    );
-                                })}
+                    {/* 2. MSc Data Science Programme */}
+                    <div className="bg-white rounded-xl shadow-md p-8 hover:shadow-lg transition-shadow">
+                        <div className="flex items-center gap-3 mb-6">
+                            <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
+                                <School className="w-6 h-6 text-white" />
                             </div>
+                            <h2 className="text-2xl font-bold text-gray-800">MSc Data Science</h2>
                         </div>
-                    </div>
-
-                    {/* Yeshwanthpur Campus */}
-                    <div 
-                        className="rounded-2xl shadow-lg p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
-                        style={{ backgroundColor: 'white', border: '1px solid #e0e0e0' }}
-                    >
-                        <div 
-                            className="inline-flex items-center justify-center w-14 h-14 rounded-xl mb-4"
-                            style={{ backgroundColor: '#4a90e2' }}
-                        >
-                            <School className="w-7 h-7 text-white" />
-                        </div>
-                        <h2 className="text-2xl font-bold mb-4" style={{ color: '#4a90e2' }}>
-                            About the Bangalore Yeshwanthpur Campus
-                        </h2>
-                        <p className="leading-relaxed" style={{ color: '#666' }}>
-                            CHRIST Yeshwanthpur Campus is next to Dasrahalli/Nagasandra Metro Stations on Tumkur Road, 5 kms from Yeswanthpur Railway station, upholding the Vision, Excellence and Service Core Values, with innovative and contemporary curricula and pedagogy.
-                        </p>
-                    </div>
-                </div>
-
-                {/* Second Row */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    {/* MSc Data Science Programme */}
-                    <div 
-                        className="rounded-2xl shadow-lg p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
-                        style={{ backgroundColor: 'white', border: '1px solid #e0e0e0' }}
-                    >
-                        <div 
-                            className="inline-flex items-center justify-center w-14 h-14 rounded-xl mb-4"
-                            style={{ backgroundColor: '#4a90e2' }}
-                        >
-                            <Laptop className="w-7 h-7 text-white" />
-                        </div>
-                        <h2 className="text-2xl font-bold mb-4" style={{ color: '#4a90e2' }}>
-                            About MSc Data Science Programme of 2024-26
-                        </h2>
-                        <div className="space-y-4" style={{ color: '#666' }}>
-                            <p className="leading-relaxed">
-                                The Master of Data Science (MDS) is a postgraduate program that combines computer science and statistics to foster proficiency in data-driven decision-making. It is a two-year course comprising six trimesters.
-                            </p>
-                            <p className="leading-relaxed">
-                                This programme aims to provide opportunity to all candidates to master the skill sets specific to data science with research bent. The curriculum supports the students to obtain adequate knowledge in theory of data science with hands-on experience in relevant domains and tools. Candidates gain exposure to research models and industry standard applications in data science through guest lectures, seminars, projects, internships, etc.
-                            </p>
-                        </div>
-                    </div>
-
-                    {/* Industry Connect Slider */}
-                    <div 
-                        className="rounded-2xl shadow-lg p-8 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
-                        style={{ backgroundColor: 'white', border: '1px solid #e0e0e0' }}
-                    >
-                        <div 
-                            className="inline-flex items-center justify-center w-14 h-14 rounded-xl mb-4"
-                            style={{ backgroundColor: '#4a90e2' }}
-                        >
-                            <Briefcase className="w-7 h-7 text-white" />
-                        </div>
-                        <h2 className="text-2xl font-bold mb-6" style={{ color: '#4a90e2' }}>
-                            Industry Connect
-                        </h2>
                         
+                        <div className="space-y-4 text-gray-600">
+                            <p>The Master of Data Science (MDS) is a postgraduate program that combines computer science and statistics to foster proficiency in data-driven decision-making. It is a two-year course comprising six trimesters.</p>
+                            
+                            <p>This programme aims to provide opportunity to all candidates to master the skill sets specific to data science with research bent. The curriculum supports students to obtain adequate knowledge in theory of data science with hands-on experience in relevant domains and tools.</p>
+                            
+                            <p>Candidates gain exposure to research models and industry standard applications through guest lectures, seminars, projects, and internships.</p>
+                        </div>
+                    </div>
+
+                    {/* 3. Achievements & Awards Slider */}
+                    <div className="bg-white rounded-xl shadow-md p-8 hover:shadow-lg transition-shadow">
+                        <div className="flex items-center gap-3 mb-6">
+                            <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
+                                <Trophy className="w-6 h-6 text-white" />
+                            </div>
+                            <h2 className="text-2xl font-bold text-gray-800">Achievements</h2>
+                        </div>
+
                         <div className="relative">
-                            {/* Slider Container */}
-                            <div className="relative overflow-hidden rounded-xl" style={{ backgroundColor: '#f0f0f0' }}>
-                                {slides.map((slide, index) => (
+                            <div className="relative overflow-hidden rounded-lg h-64">
+                                {achievements.map((slide, index) => (
                                     <div
                                         key={index}
-                                        className="transition-opacity duration-500"
-                                        style={{
-                                            display: index === currentSlide ? 'block' : 'none',
-                                            opacity: index === currentSlide ? 1 : 0
-                                        }}
+                                        className={`absolute inset-0 transition-opacity duration-500 ${
+                                            index === achievementSlide ? 'opacity-100' : 'opacity-0'
+                                        }`}
                                     >
-                                        <div className="relative h-64 sm:h-80">
-                                            <img
-                                                src={slide.src}
-                                                alt={slide.alt}
-                                                className="w-full h-full object-cover"
-                                            />
-                                            <div 
-                                                className="absolute inset-0"
-                                                style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.7), transparent)' }}
-                                            ></div>
-                                        </div>
-                                        <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                                            <h3 className="text-xl font-bold mb-1">{slide.title}</h3>
-                                            <p className="text-sm opacity-90">{slide.text}</p>
+                                        <img
+                                            src={slide.src}
+                                            alt={slide.alt}
+                                            className="w-full h-full object-cover"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                                        <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+                                            <h3 className="text-lg font-bold">{slide.title}</h3>
+                                            <p className="text-sm">{slide.text}</p>
                                         </div>
                                     </div>
                                 ))}
                             </div>
 
-                            {/* Navigation Arrows */}
                             <button
-                                onClick={() => changeSlide(-1)}
-                                className="absolute left-2 top-1/2 transform -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
-                                style={{ backgroundColor: 'rgba(255,255,255,0.9)' }}
-                                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#4a90e2'}
-                                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.9)'}
+                                onClick={() => changeSlide('achievement', -1)}
+                                className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/80 hover:bg-white rounded-full flex items-center justify-center transition-all"
                             >
-                                <ChevronLeft className="w-6 h-6" style={{ color: '#333' }} />
+                                <ChevronLeft className="w-5 h-5 text-gray-800" />
                             </button>
                             <button
-                                onClick={() => changeSlide(1)}
-                                className="absolute right-2 top-1/2 transform -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110"
-                                style={{ backgroundColor: 'rgba(255,255,255,0.9)' }}
-                                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#4a90e2'}
-                                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.9)'}
+                                onClick={() => changeSlide('achievement', 1)}
+                                className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/80 hover:bg-white rounded-full flex items-center justify-center transition-all"
                             >
-                                <ChevronRight className="w-6 h-6" style={{ color: '#333' }} />
+                                <ChevronRight className="w-5 h-5 text-gray-800" />
                             </button>
 
-                            {/* Slide Indicators */}
                             <div className="flex justify-center gap-2 mt-4">
-                                {slides.map((_, index) => (
+                                {achievements.map((_, index) => (
                                     <button
                                         key={index}
-                                        onClick={() => setCurrentSlide(index)}
-                                        className="w-2 h-2 rounded-full transition-all duration-300"
-                                        style={{
-                                            backgroundColor: index === currentSlide ? '#4a90e2' : '#d0d0d0',
-                                            width: index === currentSlide ? '24px' : '8px'
-                                        }}
+                                        onClick={() => setAchievementSlide(index)}
+                                        className={`h-2 rounded-full transition-all ${
+                                            index === achievementSlide ? 'w-8 bg-blue-600' : 'w-2 bg-gray-300'
+                                        }`}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* 4. Events Slider */}
+                    <div className="bg-white rounded-xl shadow-md p-8 hover:shadow-lg transition-shadow">
+                        <div className="flex items-center gap-3 mb-6">
+                            <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
+                                <Calendar className="w-6 h-6 text-white" />
+                            </div>
+                            <h2 className="text-2xl font-bold text-gray-800">Events</h2>
+                        </div>
+
+                        <div className="relative">
+                            <div className="relative overflow-hidden rounded-lg h-64">
+                                {events.map((slide, index) => (
+                                    <div
+                                        key={index}
+                                        className={`absolute inset-0 transition-opacity duration-500 ${
+                                            index === eventSlide ? 'opacity-100' : 'opacity-0'
+                                        }`}
+                                    >
+                                        <img
+                                            src={slide.src}
+                                            alt={slide.alt}
+                                            className="w-full h-full object-cover"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                                        <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+                                            <h3 className="text-lg font-bold">{slide.title}</h3>
+                                            <p className="text-sm">{slide.text}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+
+                            <button
+                                onClick={() => changeSlide('event', -1)}
+                                className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/80 hover:bg-white rounded-full flex items-center justify-center transition-all"
+                            >
+                                <ChevronLeft className="w-5 h-5 text-gray-800" />
+                            </button>
+                            <button
+                                onClick={() => changeSlide('event', 1)}
+                                className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/80 hover:bg-white rounded-full flex items-center justify-center transition-all"
+                            >
+                                <ChevronRight className="w-5 h-5 text-gray-800" />
+                            </button>
+
+                            <div className="flex justify-center gap-2 mt-4">
+                                {events.map((_, index) => (
+                                    <button
+                                        key={index}
+                                        onClick={() => setEventSlide(index)}
+                                        className={`h-2 rounded-full transition-all ${
+                                            index === eventSlide ? 'w-8 bg-blue-600' : 'w-2 bg-gray-300'
+                                        }`}
                                     />
                                 ))}
                             </div>
@@ -229,16 +283,6 @@ const AboutSection = () => {
                     </div>
                 </div>
             </div>
-
-            <style jsx>{`
-                @keyframes fade-in {
-                    from { opacity: 0; transform: translateY(20px); }
-                    to { opacity: 1; transform: translateY(0); }
-                }
-                .animate-fade-in {
-                    animation: fade-in 0.6s ease-out forwards;
-                }
-            `}</style>
         </section>
     );
 };
